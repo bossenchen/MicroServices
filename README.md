@@ -333,7 +333,7 @@ from sqlalchemy import (Column, Integer, MetaData, String, Table,
 
 from databases import Database
 
-DATABASE_URL = 'postgresql://neo:admin@192.168.3.40/movie'
+DATABASE_URL = 'postgresql://movie_user:movie_password@localhost/movie'
 
 engine = create_engine(DATABASE_URL)
 metadata = MetaData()
@@ -783,6 +783,7 @@ python-microservices/
 fastapi[all] == 0.75.2
 httpx == 0.22.0
 databases[postgresql] == 0.5.5
+aiopg
 ```
 
 `Dockerfile` 内容如下：
