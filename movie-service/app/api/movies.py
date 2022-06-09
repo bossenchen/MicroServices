@@ -1,8 +1,9 @@
 from typing import List
+
 from fastapi import APIRouter, HTTPException
 
-from .models import MovieOut, MovieIn, MovieUpdate
 from . import crud
+from .models import MovieOut, MovieIn, MovieUpdate
 from .service import is_cast_present, get_casts_service_host
 
 movies = APIRouter()
@@ -28,7 +29,7 @@ async def get_movies():
     return await crud.get_all_movies()
 
 
-@movies.get('/{movie_id}/', response_model=MovieOut)
+@movies.get('/{movie_id}', response_model=MovieOut)
 async def get_movie(movie_id: int):
     movie = await crud.get_movie(movie_id)
     if not movie:
@@ -36,7 +37,7 @@ async def get_movie(movie_id: int):
     return movie
 
 
-@movies.put('/{movie_id}/', response_model=MovieOut)
+@movies.put('/{movie_id}', response_model=MovieOut)
 async def update_movie(movie_id: int, payload: MovieUpdate):
     movie = await crud.get_movie(movie_id)
     if not movie:
