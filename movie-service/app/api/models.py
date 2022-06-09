@@ -1,5 +1,6 @@
-from pydantic import BaseModel
 from typing import List, Optional
+
+from pydantic import BaseModel, PositiveInt
 
 
 class MovieIn(BaseModel):
@@ -10,7 +11,7 @@ class MovieIn(BaseModel):
 
 
 class MovieOut(MovieIn):
-    id: int
+    id: PositiveInt
 
 
 class MovieUpdate(MovieIn):

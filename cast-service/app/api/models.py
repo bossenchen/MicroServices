@@ -1,5 +1,6 @@
-from pydantic import BaseModel
 from typing import Optional
+
+from pydantic import BaseModel, PositiveInt
 
 
 class CastIn(BaseModel):
@@ -8,7 +9,7 @@ class CastIn(BaseModel):
 
 
 class CastOut(CastIn):
-    id: int
+    id: PositiveInt
 
 
 class CastUpdate(CastIn):
