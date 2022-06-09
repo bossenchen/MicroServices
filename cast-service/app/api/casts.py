@@ -1,8 +1,9 @@
+from typing import List
+
 from fastapi import APIRouter, HTTPException
 
-from typing import List
-from .models import CastOut, CastIn
 from . import crud
+from .models import CastOut, CastIn
 
 casts = APIRouter()
 
@@ -19,7 +20,7 @@ async def create_cast(payload: CastIn):
     return response
 
 
-@casts.get('/{cast_id}/', response_model=CastOut)
+@casts.get('/{cast_id}', response_model=CastOut)
 async def get_cast(cast_id: int):
     cast = await crud.get_cast(cast_id)
     if not cast:
