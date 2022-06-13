@@ -28,7 +28,7 @@ async def get_cast(cast_id: int):
     return cast
 
 
-@casts.put('/{cast_id}', response_model=CastOut)
+@casts.put('/{cast_id}', response_model=CastIn)
 async def update_cast(cast_id: int, payload: CastUpdate):
     cast = await crud.get_cast(cast_id)
     if not cast:

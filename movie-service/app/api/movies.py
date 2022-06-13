@@ -37,7 +37,7 @@ async def get_movie(movie_id: int):
     return movie
 
 
-@movies.put('/{movie_id}', response_model=MovieOut)
+@movies.put('/{movie_id}', response_model=MovieIn)
 async def update_movie(movie_id: int, payload: MovieUpdate):
     movie = await crud.get_movie(movie_id)
     if not movie:
