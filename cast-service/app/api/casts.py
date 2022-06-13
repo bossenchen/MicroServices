@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter, HTTPException
 
 from . import crud
-from .models import CastOut, CastIn
+from .models import CastOut, CastIn, CastUpdate
 
 casts = APIRouter()
 
@@ -26,6 +26,19 @@ async def get_cast(cast_id: int):
     if not cast:
         raise HTTPException(status_code=404, detail="Cast not found")
     return cast
+
+
+@casts.put('/{cast_id}', response_model=CastOut)
+async def update_cast(cast_id: int, payload: CastUpdate):
+    cast = await crud.get_cast(cast_id)
+    if not cast:
+        raise HTTPException(status_code=404, detail="Cast not found")
+
+    update_data = payload.dict(exclude_unset=True)
+    cast_in_db = CastIn(**cast)
+    updated_cast = cast_in_db.copy(update=update_data)
+
+    return await crud.update_cast(cast_id, updated_cast)
 
 
 @casts.delete('/{cast_id}', response_model=CastOut)
