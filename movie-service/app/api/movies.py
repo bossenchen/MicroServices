@@ -54,7 +54,8 @@ async def update_movie(movie_id: int, payload: MovieUpdate):
 
     updated_movie = movie_in_db.copy(update=update_data)
 
-    return await crud.update_movie(movie_id, updated_movie)
+    await crud.update_movie(movie_id, updated_movie)
+    return updated_movie
 
 
 @movies.delete('/{movie_id}', response_model=MovieOut)

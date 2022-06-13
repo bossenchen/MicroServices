@@ -38,7 +38,8 @@ async def update_cast(cast_id: int, payload: CastUpdate):
     cast_in_db = CastIn(**cast)
     updated_cast = cast_in_db.copy(update=update_data)
 
-    return await crud.update_cast(cast_id, updated_cast)
+    await crud.update_cast(cast_id, updated_cast)
+    return updated_cast
 
 
 @casts.delete('/{cast_id}', response_model=CastOut)
