@@ -21,3 +21,8 @@ async def delete_cast(cast_id: int):
 async def get_all_casts():
     query = casts.select()
     return await database.fetch_all(query=query)
+
+
+async def update_cast(cast_id: int, payload: CastIn):
+    query = casts.update().where(casts.c.id == cast_id).values(**payload.dict())
+    return await database.execute(query=query)
